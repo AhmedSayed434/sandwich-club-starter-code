@@ -11,17 +11,25 @@ import java.util.List;
 
 public class JsonUtils {
 
+    public static final String KEY_MAIN_NAME = "mainName";
+    public static final String KEY_ALSO_KNOW_AS = "alsoKnownAs";
+    public static final String KEY_PLACE_OF_ORIGIN = "placeOfOrigin";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_INGREDIENTS = "ingredients";
+    public static final String KEY_NAME = "name";
+
     public static Sandwich parseSandwichJson(String json) {
         try {
             JSONObject sandwichJsonObject = new JSONObject(json);
-            JSONObject nameJsonObject = sandwichJsonObject.getJSONObject("name");
+            JSONObject nameJsonObject = sandwichJsonObject.getJSONObject(KEY_NAME);
             Sandwich sandwich = new Sandwich();
-            sandwich.setMainName(nameJsonObject.getString("mainName"));
-            sandwich.setDescription(sandwichJsonObject.getString("description"));
-            sandwich.setImage(sandwichJsonObject.getString("image"));
-            sandwich.setPlaceOfOrigin(sandwichJsonObject.getString("placeOfOrigin"));
-            sandwich.setAlsoKnownAs(convertJsonArrayToArrayList(nameJsonObject.getJSONArray("alsoKnownAs")));
-            sandwich.setIngredients(convertJsonArrayToArrayList(sandwichJsonObject.getJSONArray("ingredients")));
+            sandwich.setMainName(nameJsonObject.getString(KEY_MAIN_NAME));
+            sandwich.setDescription(sandwichJsonObject.getString(KEY_DESCRIPTION));
+            sandwich.setImage(sandwichJsonObject.getString(KEY_IMAGE));
+            sandwich.setPlaceOfOrigin(sandwichJsonObject.getString(KEY_PLACE_OF_ORIGIN));
+            sandwich.setAlsoKnownAs(convertJsonArrayToArrayList(nameJsonObject.getJSONArray(KEY_ALSO_KNOW_AS)));
+            sandwich.setIngredients(convertJsonArrayToArrayList(sandwichJsonObject.getJSONArray(KEY_INGREDIENTS)));
             return sandwich;
         } catch (JSONException e) {
             e.printStackTrace();
